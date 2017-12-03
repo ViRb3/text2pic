@@ -3,7 +3,13 @@ var values = []; //[7, 8, 9];
 var image = []; //[["x", "x", "x"], ["y", "y", "y"], ["y", "y", "y"], ["y", "y", "y"], ["y", "y", "y"]];
 
 function createBlock(word) {
+    value = [];
+    for (var x in image) {
+        values.push(x.length);
+    }
     var body = document.getElementsByTagName('body');
+   
+
     var tbl = document.createElement('table');
     tbl.setAttribute('border', 1);
     var tbdy = document.createElement('tbody');
@@ -62,7 +68,7 @@ function getVal(data, status) {
         for (var k in obj[key]) {
             console.log(obj[key][k]);
             i.push(obj[key][k]);
-            
+
         }
         image.push(i);
         i = [];
@@ -90,7 +96,8 @@ function next_image_up(clicked_id) {
     } else {
         values[x]++;
     }
-    alert(values[x])
+
+    document.getElementById(clicked_id + "image").src = image[x][values[x]];
 }
 
 
@@ -101,5 +108,5 @@ function next_image_down(clicked_id) {
     } else {
         values[x]--;
     }
-
+    document.getElementById(clicked_id + "image").src = image[x][values[x]];
 }

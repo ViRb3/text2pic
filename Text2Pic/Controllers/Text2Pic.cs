@@ -63,10 +63,9 @@ namespace Text2Pic.Controllers
             foreach (var word in parsedWords)
             {
                 string sqlResult = Program.Database.GetUrl(word.Word.ToLower(), word.Type);
+                correctedWords.Add((word.Word, await GetImages(word.Word)));
                 if (!string.IsNullOrEmpty(sqlResult))
-                    correctedWords.Add((word.Word, new[] {sqlResult}));
-                else
-                    correctedWords.Add((word.Word, await GetImages(word.Word)));
+                    correctedWords.Last().Item2[0] = sqlResult;
             }
 
             JObject jObject = new JObject();
